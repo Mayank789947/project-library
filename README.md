@@ -1,1 +1,1 @@
-# project-library
+# A simple library project made with the help HTML, CSS and JS.
