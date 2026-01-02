@@ -6,6 +6,7 @@ const titleInput = document.querySelector("#title")
 const authorInput = document.querySelector("#author")
 const pagesInput = document.querySelector("#pages")
 const readStatus = document.querySelector("#read-status")
+const form = document.querySelector(".form");
 
 const myLibrary = [];
 
@@ -17,7 +18,10 @@ function Book(title, author, pages, status) {
 }
 
 function addBookToLibrary(book) {
-   
+   let uuid = crypto.randomUUID();
+   book.id = uuid;
+   myLibrary.push(book);
+   console.log(myLibrary);
 }
 
 addBookBtn.addEventListener("click", () => {
@@ -42,4 +46,5 @@ submitBtn.addEventListener("click", (e) => {
       const newBook = new Book(titleInput.value, authorInput.value, pagesInput.value, readStatus.checked = "Not read yet");
       addBookToLibrary(newBook);
    }
+   form.reset();
 })
