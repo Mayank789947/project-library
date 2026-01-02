@@ -82,7 +82,26 @@ function createBookCard(book) {
       }
    })
    
+   deleteBtn.addEventListener("click", (e) => {
+      deleteBook(e.target.dataset.id);
+   })
+}
 
+function listAllBooks() {
+   myLibrary.map(book => {
+      book.id = crypto.randomUUID();
+      createBookCard(book);
+   })
+}
+
+listAllBooks();
+
+
+function deleteBook(id) {
+   let bookIndex = myLibrary.findIndex(book => book.id === id)
+   myLibrary.splice(bookIndex, 1);
+   cardContainer.innerHTML = "";
+   listAllBooks();
 }
 
 
