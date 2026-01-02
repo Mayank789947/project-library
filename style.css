@@ -1,0 +1,26 @@
+* {
+    box-sizing: border-box;
+}
+
+dialog::backdrop {
+    background-color: gray;
+    opacity: 0.7;
+}
+
+.dialog-container {
+   padding: 2em;
+   border: 2px solid black;
+   border-radius: 0.5em;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    max-width: min-content;
+    gap: 1em;
+    font-size: 1.2rem;
+}
+
+.form > .row > input {
+    margin-top: 0.4em;
+}
