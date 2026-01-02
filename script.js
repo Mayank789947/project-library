@@ -25,7 +25,8 @@ function addBookToLibrary(book) {
    console.log(myLibrary);
 }
 
-function createBookCard() {
+function createBookCard(book) {
+   console.log(book);
    let bookCard = document.createElement("div");
    let bookTitle = document.createElement("h2");
    let authorName = document.createElement("p");
@@ -34,11 +35,19 @@ function createBookCard() {
    let changeStatusBtn = document.createElement("button");
    let deleteBtn = document.createElement("button");
 
-   bookTitle.textContent = "The Odyssey";
-   authorName.textContent = "author: Homer";
-   pageCount.textContent = "pages: 448";
-   readingStatus.textContent = "status: Not read yet";
-   changeStatusBtn.textContent = "Read";
+   bookTitle.textContent = `${book.title}`;
+   authorName.textContent = `author: ${book.author}`;
+   pageCount.textContent = `pages: ${book.pages}`;
+   console.log(book.status);
+   if(book.status === true) {
+      readingStatus.textContent = `status: "Yes, read it"`;
+      changeStatusBtn.textContent = "Unread";
+      changeStatusBtn.style.backgroundColor = "red";
+   } else {
+      readingStatus.textContent = `status: "Not read yet"`;
+      changeStatusBtn.textContent = "Read";
+      changeStatusBtn.style.backgroundColor = "green";
+   }
    deleteBtn.textContent = "Delete";
 
    bookCard.setAttribute("class", "book-card");
@@ -46,10 +55,20 @@ function createBookCard() {
 
    bookCard.append(bookTitle, authorName, pageCount, readingStatus, changeStatusBtn, deleteBtn);
    bookContainer.append(bookCard);
+
+   changeStatusBtn.addEventListener("click", () => {
+      if(changeStatusBtn.textContent === "Read") {
+         readingStatus.textContent = `status: "Yes, read it"`;
+         changeStatusBtn.textContent = "Unread";
+         changeStatusBtn.style.backgroundColor = "red";
+      } else {
+         changeStatusBtn.textContent = "Read";
+         readingStatus.textContent = `status: "Not read yet"`;
+         changeStatusBtn.style.backgroundColor = "green";
+      }
+   })
    
 }
-
-createBookCard();
 
 
 addBookBtn.addEventListener("click", () => {
@@ -68,11 +87,13 @@ submitBtn.addEventListener("click", (e) => {
    console.log(readStatus.checked);
 
    if(readStatus.checked) {
-     const newBook = new Book(titleInput.value, authorInput.value, pagesInput.value, readStatus.checked = "Yes, read it");
+     const newBook = new Book(titleInput.value, authorInput.value, pagesInput.value, readStatus.checked);
      addBookToLibrary(newBook);
+     createBookCard(newBook);
    } else {
-      const newBook = new Book(titleInput.value, authorInput.value, pagesInput.value, readStatus.checked = "Not read yet");
+      const newBook = new Book(titleInput.value, authorInput.value, pagesInput.value, readStatus.checked);
       addBookToLibrary(newBook);
+      createBookCard(newBook);
    }
    form.reset();
 })
