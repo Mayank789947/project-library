@@ -1,19 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project-Library</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <main>
         <h1>My Library</h1>
         <div class="book-container">
-            
+            <button class="add-book">Add Book</button>
+            <dialog class="dialog-container">
+                <button class="close-btn" autofocus>X</button>
+                <form action="#" method="get" class="form">
+                    <div class="row">
+                        <label for="title">Title: </label>
+                        <input type="text" id="title" required>
+                    </div>
+                    <div class="row">
+                        <label for="author">Author: </label>
+                        <input type="text" id="author" required>
+                    </div>
+                    <div class="row">
+                        <label for="pages">Pages: </label>
+                        <input type="tel" id="pages">
+                    </div>
+                    <div class="row">
+                        <label for="read-status">Read: </label>
+                        <input type="checkbox" name="read-status" id="read-status">
+                    </div>
+                    <div class="row">
+                        <button type="submit" class="submit-btn">Submit</button>
+                    </div>
+                </form>
+            </dialog>
+
         </div>
     </main>
-    
+
     <script src="script.js"></script>
 </body>
+
 </html>
