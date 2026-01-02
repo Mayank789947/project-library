@@ -8,8 +8,22 @@ const authorInput = document.querySelector("#author")
 const pagesInput = document.querySelector("#pages")
 const readStatus = document.querySelector("#read-status")
 const form = document.querySelector(".form");
+const cardContainer = document.querySelector(".card-container");
 
-const myLibrary = [];
+const myLibrary = [
+   {  
+     title: "The Jungle Book",
+     author: "Rudyard Kipling",
+     pages: 130,
+     status: true, 
+   },
+   {
+     title: "The Odyssey",
+     author: "Homer",
+     pages: 488,
+     status: false, 
+   },
+];
 
 function Book(title, author, pages, status) {
    this.title = title;
@@ -22,11 +36,9 @@ function addBookToLibrary(book) {
    let uuid = crypto.randomUUID();
    book.id = uuid;
    myLibrary.push(book);
-   console.log(myLibrary);
 }
 
 function createBookCard(book) {
-   console.log(book);
    let bookCard = document.createElement("div");
    let bookTitle = document.createElement("h2");
    let authorName = document.createElement("p");
@@ -50,11 +62,13 @@ function createBookCard(book) {
    }
    deleteBtn.textContent = "Delete";
 
+   bookCard.setAttribute("data-id", `${book.id}`);
    bookCard.setAttribute("class", "book-card");
    deleteBtn.setAttribute("class", "deleteBtn");
+   deleteBtn.setAttribute("data-id", `${book.id}`);
 
    bookCard.append(bookTitle, authorName, pageCount, readingStatus, changeStatusBtn, deleteBtn);
-   bookContainer.append(bookCard);
+   cardContainer.append(bookCard);
 
    changeStatusBtn.addEventListener("click", () => {
       if(changeStatusBtn.textContent === "Read") {
@@ -68,6 +82,7 @@ function createBookCard(book) {
       }
    })
    
+
 }
 
 
