@@ -16,3 +16,30 @@ function Book(title, author, pages, status) {
    this.status = status;
 }
 
+function addBookToLibrary(book) {
+   
+}
+
+addBookBtn.addEventListener("click", () => {
+   dialog.showModal();
+});
+
+closeBtn.addEventListener("click", () => {
+   dialog.close()
+})
+
+submitBtn.addEventListener("click", (e) => {
+   e.preventDefault();
+   console.log(titleInput.value);
+   console.log(authorInput.value);
+   console.log(pagesInput.value);
+   console.log(readStatus.checked);
+
+   if(readStatus.checked) {
+     const newBook = new Book(titleInput.value, authorInput.value, pagesInput.value, readStatus.checked = "Yes, read it");
+     addBookToLibrary(newBook);
+   } else {
+      const newBook = new Book(titleInput.value, authorInput.value, pagesInput.value, readStatus.checked = "Not read yet");
+      addBookToLibrary(newBook);
+   }
+})
