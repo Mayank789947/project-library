@@ -2,15 +2,82 @@
     box-sizing: border-box;
 }
 
+body {
+    background-color: #8B9EB7;
+    color: #3D0814;
+}
+
+main {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    font-size: 4em;
+    margin-top: 0.5em;
+}
+
+.book-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.add-book {
+    font-size: 1.6rem;
+    padding: 0.5em 1.6em;
+    border-radius: 0.4em;
+    border: none;
+    margin-bottom: 2em;
+    cursor: pointer;
+    background-color: #3D0814;
+    color: #ffffff;
+}
+
+.add-book:hover {
+    background-color: #560b1d;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2em;
+}
+
 dialog::backdrop {
     background-color: gray;
     opacity: 0.7;
 }
 
 .dialog-container {
-   padding: 2em;
+   padding: 3em;
+   padding-bottom: 2em;
    border: 2px solid black;
    border-radius: 0.5em;
+   position: relative;
+   background-color: bisque;
+   color: #3D0814;
+}
+
+.close-btn {
+   position: absolute;
+   right: 1.5em;
+   top: 1.5em;
+   width: 3em;
+   height: 2em;
+   background-color: #A4031F;
+   color: #ffffff;
+   border: none;
+   border-radius: 0.5em;
+   font-weight: bold;
+   cursor: pointer;
+}
+
+.close-btn:hover {
+    background-color: #d00627;
 }
 
 .form {
@@ -19,14 +86,55 @@ dialog::backdrop {
     max-width: min-content;
     gap: 1em;
     font-size: 1.2rem;
+    margin-top: 1em;
+    font-weight: 700;
 }
 
 .form > .row > input {
     margin-top: 0.4em;
+    padding: 0.4em;
+    font-size: 1rem;
+    background-color: #ecebeb;
+    color: #3D0814;
+    font-weight: 700;
+}
+
+.status-row {
+    display: flex;
+    align-items: center;
+}
+
+.status-row > input[type="checkbox"] {
+  accent-color: #2196F3; 
+  width: 1.4em; 
+  height: 1.4em;
+  margin-left: 1em;
+  cursor: pointer;
+}
+
+.btn-row {
+    margin: 0.5em auto 0;
+}
+
+.submit-btn {
+    width: 100%;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 0.6em 2em;
+    margin: 0.5em auto;
+    border: none;
+    border-radius: 0.5em;
+    background-color: #007468ff;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: rgb(0, 97, 87);
 }
 
 .book-card {
-    width: 300px;
+    width: 20em;
     padding: 1em;
     font-size: 1.2rem;
     font-weight: 600;
@@ -41,10 +149,11 @@ dialog::backdrop {
 }
 
 .book-card > button {
-    background-color: green;
+    width: 7em;
+    background-color: #007468ff;
     color: #ffffff;
     font-size: 0.9rem;
-    padding: 0.5em 1.6em;
+    padding: 0.6em 1.6em;
     border: none;
     border-radius: 0.5rem;
     cursor: pointer;
@@ -52,13 +161,13 @@ dialog::backdrop {
 }
 
 .book-card > button:hover {
-    background-color: rgb(0, 96, 0);
+    background-color: rgb(0, 152, 137);
 }
 
 .book-card > .deleteBtn {
-    background-color: red;
+    background-color: #A4031F;
 }
 
 .book-card > .deleteBtn:hover {
-    background-color: rgb(218, 0, 0);
+    background-color: #d00627;
 }
