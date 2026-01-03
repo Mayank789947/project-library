@@ -48,17 +48,17 @@ function createBookCard(book) {
    let deleteBtn = document.createElement("button");
 
    bookTitle.textContent = `${book.title}`;
-   authorName.textContent = `author: ${book.author}`;
-   pageCount.textContent = `pages: ${book.pages}`;
+   authorName.textContent = `Author: ${book.author}`;
+   pageCount.textContent = `Pages: ${book.pages}`;
    console.log(book.status);
    if(book.status === true) {
-      readingStatus.textContent = `status: "Yes, read it"`;
+      readingStatus.textContent = `Status: "Yes, read it"`;
       changeStatusBtn.textContent = "Unread";
-      changeStatusBtn.style.backgroundColor = "red";
+      changeStatusBtn.style.backgroundColor = "#A4031F";
    } else {
-      readingStatus.textContent = `status: "Not read yet"`;
+      readingStatus.textContent = `Status: "Not read yet"`;
       changeStatusBtn.textContent = "Read";
-      changeStatusBtn.style.backgroundColor = "green";
+      changeStatusBtn.style.backgroundColor = "#007468ff";
    }
    deleteBtn.textContent = "Delete";
 
@@ -72,13 +72,13 @@ function createBookCard(book) {
 
    changeStatusBtn.addEventListener("click", () => {
       if(changeStatusBtn.textContent === "Read") {
-         readingStatus.textContent = `status: "Yes, read it"`;
+         readingStatus.textContent = `Status: "Yes, read it"`;
          changeStatusBtn.textContent = "Unread";
-         changeStatusBtn.style.backgroundColor = "red";
+         changeStatusBtn.style.backgroundColor = "#A4031F";
       } else {
          changeStatusBtn.textContent = "Read";
-         readingStatus.textContent = `status: "Not read yet"`;
-         changeStatusBtn.style.backgroundColor = "green";
+         readingStatus.textContent = `Status: "Not read yet"`;
+         changeStatusBtn.style.backgroundColor = "#007468ff";
       }
    })
    
@@ -106,6 +106,7 @@ function deleteBook(id) {
 
 
 addBookBtn.addEventListener("click", () => {
+   form.reset();
    dialog.showModal();
 });
 
@@ -115,10 +116,6 @@ closeBtn.addEventListener("click", () => {
 
 submitBtn.addEventListener("click", (e) => {
    e.preventDefault();
-   console.log(titleInput.value);
-   console.log(authorInput.value);
-   console.log(pagesInput.value);
-   console.log(readStatus.checked);
 
    if(readStatus.checked) {
      const newBook = new Book(titleInput.value, authorInput.value, pagesInput.value, readStatus.checked);
