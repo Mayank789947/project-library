@@ -25,11 +25,13 @@ const myLibrary = [
    },
 ];
 
-function Book(title, author, pages, status) {
-   this.title = title;
-   this.author = author;
-   this.pages = pages;
-   this.status = status;
+class Book {
+   constructor(title, author, pages, status) {
+      this.title = title;
+      this.author = author;
+      this.pages = pages;
+      this.status = status;
+   }
 }
 
 function addBookToLibrary(book) {
@@ -117,14 +119,10 @@ closeBtn.addEventListener("click", () => {
 submitBtn.addEventListener("click", (e) => {
    e.preventDefault();
 
-   if(readStatus.checked) {
-     const newBook = new Book(titleInput.value, authorInput.value, pagesInput.value, readStatus.checked);
-     addBookToLibrary(newBook);
-     createBookCard(newBook);
-   } else {
-      const newBook = new Book(titleInput.value, authorInput.value, pagesInput.value, readStatus.checked);
-      addBookToLibrary(newBook);
-      createBookCard(newBook);
-   }
+   const newBook = new Book(titleInput.value, authorInput.value, pagesInput.value, readStatus.checked);
+   console.log(newBook);
+   addBookToLibrary(newBook);
+   createBookCard(newBook);
+
    form.reset();
 })
