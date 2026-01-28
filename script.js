@@ -11,17 +11,17 @@ const form = document.querySelector(".form");
 const cardContainer = document.querySelector(".card-container");
 
 const myLibrary = [
-   {  
-     title: "The Jungle Book",
-     author: "Rudyard Kipling",
-     pages: 130,
-     status: true, 
+   {
+      title: "The Jungle Book",
+      author: "Rudyard Kipling",
+      pages: 130,
+      status: true,
    },
    {
-     title: "The Odyssey",
-     author: "Homer",
-     pages: 488,
-     status: false, 
+      title: "The Odyssey",
+      author: "Homer",
+      pages: 488,
+      status: false,
    },
 ];
 
@@ -52,8 +52,7 @@ function createBookCard(book) {
    bookTitle.textContent = `${book.title}`;
    authorName.textContent = `Author: ${book.author}`;
    pageCount.textContent = `Pages: ${book.pages}`;
-   console.log(book.status);
-   if(book.status === true) {
+   if (book.status === true) {
       readingStatus.textContent = `Status: "Yes, read it"`;
       changeStatusBtn.textContent = "Unread";
       changeStatusBtn.style.backgroundColor = "#A4031F";
@@ -73,7 +72,7 @@ function createBookCard(book) {
    cardContainer.append(bookCard);
 
    changeStatusBtn.addEventListener("click", () => {
-      if(changeStatusBtn.textContent === "Read") {
+      if (changeStatusBtn.textContent === "Read") {
          readingStatus.textContent = `Status: "Yes, read it"`;
          changeStatusBtn.textContent = "Unread";
          changeStatusBtn.style.backgroundColor = "#A4031F";
@@ -83,7 +82,7 @@ function createBookCard(book) {
          changeStatusBtn.style.backgroundColor = "#007468ff";
       }
    })
-   
+
    deleteBtn.addEventListener("click", (e) => {
       deleteBook(e.target.dataset.id);
    })
@@ -106,9 +105,8 @@ function deleteBook(id) {
    listAllBooks();
 }
 
-
 addBookBtn.addEventListener("click", () => {
-   form.reset();
+   formValidator.reset();
    dialog.showModal();
 });
 
@@ -116,13 +114,92 @@ closeBtn.addEventListener("click", () => {
    dialog.close()
 })
 
-submitBtn.addEventListener("click", (e) => {
+form.addEventListener("submit", e => {
    e.preventDefault();
 
-   const newBook = new Book(titleInput.value, authorInput.value, pagesInput.value, readStatus.checked);
-   console.log(newBook);
+   if (!form.checkValidity()) return;
+
+   const newBook = new Book(
+      titleInput.value,
+      authorInput.value,
+      pagesInput.value,
+      readStatus.checked
+   );
+
    addBookToLibrary(newBook);
    createBookCard(newBook);
+   dialog.close();
+});
 
-   form.reset();
-})
+
+function setupFormValidation(form) {
+   const inputs = form.querySelectorAll("input");
+
+   function validateInput(input) {
+      const errorEl = input.parentElement.querySelector(".error-message");
+
+      if(input.validity.valid) {
+         errorEl.textContent = "";
+         return true;
+      }
+
+      if(!input.classList.contains("touched")) {
+         return false;
+      }
+
+      if(input.validity.valueMissing) {
+         errorEl.textContent = "This field is required";
+      } else if (input.validity.typeMismatch) {
+         errorEl.textContent = "Invalid value";
+      } else if (input.validity.rangeUnderflow) {
+         errorEl.textContent = "Value must be greater than 1";
+      }
+
+      return false;
+   }
+
+   inputs.forEach((input) => {
+      input.addEventListener("blur", () => {
+         input.classList.add("touched");
+         validateInput(input);
+      })
+
+      input.addEventListener("input", () => {
+         if(input.classList.contains("touched")) {
+            validateInput(input);
+         }
+      })
+   })
+
+
+   form.addEventListener("submit", (e) => {
+      let isFormValid = true;
+
+      inputs.forEach((input) => {
+         input.classList.add("touched");
+         if (!validateInput(input)) {
+            isFormValid = false;
+         }
+      })
+
+      if (!isFormValid) {
+         e.preventDefault();
+      }
+   })
+
+   return {
+      reset() {
+         inputs.forEach((input) => {
+            input.classList.remove("touched");
+            input.setCustomValidity("");
+            const errorEl = input.parentElement.querySelector(".error-message");
+            if(errorEl) errorEl.textContent = "";
+         })
+         form.reset();
+      }
+   }
+}
+
+const formValidator = setupFormValidation(form);
+
+

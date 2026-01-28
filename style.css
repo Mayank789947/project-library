@@ -172,3 +172,24 @@ dialog::backdrop {
 .book-card > .deleteBtn:hover {
     background-color: #d00627;
 }
+
+input {
+  border: 2px solid #ccc;
+  padding: 0.6rem;
+  border-radius: 6px;
+}
+
+input.touched:invalid {
+  border-color: #e63946;
+}
+
+input.touched:valid {
+  border-color: #2a9d8f;
+}
+
+.error-message {
+  color: #e63946;
+  font-size: 0.85rem;
+  min-height: 1em;
+}
+
